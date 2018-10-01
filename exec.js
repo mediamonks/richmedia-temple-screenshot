@@ -1,3 +1,7 @@
-const screenshot = require('./index');
+const screenshot = require("./index");
 
-screenshot.fromPath('./test', null, './test.jpg');
+screenshot.fromPath({
+  filepath: "./test",
+  config: {},
+  location: "./test.jpg"
+});

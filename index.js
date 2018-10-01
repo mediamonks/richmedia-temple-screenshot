@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
-const express = require("express");
 const httpServer = require("http-server/lib/http-server");
+const portfinder = require("portfinder");
 
 async function fromUrl(url, richmediaRc, screenshotLocation) {
   const browser = await puppeteer.launch();
@@ -25,14 +25,15 @@ async function fromUrl(url, richmediaRc, screenshotLocation) {
 async function fromPath({ filepath, config, location, clip = null }) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  const port = await portfinder.getPortPromise();
 
   const server = httpServer.createServer({
     root: filepath
   });
 
-  server.listen(8081, "0.0.0.0", function() {});
+  server.listen(port, "0.0.0.0", function() {});
 
-  await page.goto("http://localhost:8081");
+  await page.goto(`http://localhost:${port}`);
 
   const settings = { path: location };
 
@@ -49,14 +50,15 @@ async function fromElement({ selector, filepath, config, location }) {
   const padding = 0;
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+	const port = await portfinder.getPortPromise();
 
   const server = httpServer.createServer({
     root: filepath
   });
 
-  server.listen(8081, "0.0.0.0", function() {});
+  server.listen(port, "0.0.0.0", function() {});
 
-  await page.goto("http://localhost:8081");
+  await page.goto(`http://localhost:${port}`);
 
   const rect = await page.evaluate(selector => {
     const element = document.querySelector(selector);
@@ -81,3 +83,5 @@ async function fromElement({ selector, filepath, config, location }) {
 
 module.exports.fromUrl = fromUrl;
 module.exports.fromPath = fromPath;
+module.exports.fromElement = fromElement;
+
