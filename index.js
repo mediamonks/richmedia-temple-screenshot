@@ -2,11 +2,11 @@ const puppeteer = require("puppeteer");
 const httpServer = require("http-server/lib/http-server");
 const portfinder = require("portfinder");
 
-async function fromUrl(url, richmediaRc, screenshotLocation) {
+async function fromUrl({ url, config, location }) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(url);
-  await page.screenshot({ path: screenshotLocation });
+  await page.screenshot({ path: location });
   await browser.close();
 }
 
@@ -50,7 +50,7 @@ async function fromElement({ selector, filepath, config, location }) {
   const padding = 0;
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-	const port = await portfinder.getPortPromise();
+  const port = await portfinder.getPortPromise();
 
   const server = httpServer.createServer({
     root: filepath
@@ -84,4 +84,3 @@ async function fromElement({ selector, filepath, config, location }) {
 module.exports.fromUrl = fromUrl;
 module.exports.fromPath = fromPath;
 module.exports.fromElement = fromElement;
-
