@@ -1,6 +1,6 @@
 {
   "name": "@mediamonks/richmedia-temple-screenshot",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "create screenshots",
   "main": "index.js",
   "scripts": {
