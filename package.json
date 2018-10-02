@@ -1,5 +1,5 @@
 {
-  "name": "richmedia-temple-screenshot",
+  "name": "@mediamonks/richmedia-temple-screenshot",
   "version": "1.0.0",
   "description": "create screenshots",
   "main": "index.js",
