@@ -124,3 +124,4 @@ async function fromElement({ selector, filepath, config, location }) {
 module.exports.fromUrl = fromUrl;
 module.exports.fromPath = fromPath;
 module.exports.fromElement = fromElement;
+module.exports.fromUrlAndElement = fromUrlAndElement;
