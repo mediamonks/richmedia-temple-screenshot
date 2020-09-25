@@ -8,6 +8,11 @@ const portfinder = require("portfinder");
  * @param {any} config
  * @param {string} location
  * @param {string} selector
+ * @param {object} clip
+ * @param {number} clip.width
+ * @param {number} clip.height
+ * @param {number} clip.x
+ * @param {number} clip.y
  * @param {string} waitUntil
  * @return {Promise<void>}
  */
@@ -16,6 +21,7 @@ async function fromUrl({
   config = {},
   location,
   selector = null,
+  clip = null,
   waitUntil = "load"
 }) {
   const padding = 0;
@@ -44,12 +50,14 @@ async function fromUrl({
   };
 
   if (rect) {
-    settings.rect = {
+    settings.clip = {
       x: rect.left - padding,
       y: rect.top - padding,
       width: rect.width + padding * 2,
       height: rect.height + padding * 2
     };
+  } else if(clip && !settings.clip){
+    settings.clip = clip;
   }
 
   await page.screenshot(settings);
