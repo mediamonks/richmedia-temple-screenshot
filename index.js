@@ -44,7 +44,7 @@ async function fromUrl({
   };
 
   if (rect) {
-    settings.rect = {
+    settings.clip = {
       x: rect.left - padding,
       y: rect.top - padding,
       width: rect.width + padding * 2,
