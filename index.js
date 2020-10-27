@@ -8,6 +8,11 @@ const portfinder = require("portfinder");
  * @param {any} config
  * @param {string} location
  * @param {string} selector
+ * @param {object} clip
+ * @param {number} clip.width
+ * @param {number} clip.height
+ * @param {number} clip.x
+ * @param {number} clip.y
  * @param {string} waitUntil
  * @return {Promise<void>}
  */
@@ -17,6 +22,7 @@ async function fromUrl({
   location,
   clip = null,
   selector = null,
+  clip = null,
   waitUntil = "load"
 }) {
   const padding = 0;

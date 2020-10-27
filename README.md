@@ -1,2 +1,2 @@
-# richmedia-temple-screenshot
-Creates screenshots of richmedia units in correlation with richmediarc
+# Richmedia Temple Screenshot [![Travis](https://img.shields.io/travis/mediamonks/richmedia-temple-screenshot.svg)](https://travis-ci.org/mediamonks/richmedia-temple-screenshot) [![npm](https://img.shields.io/npm/v/@mediamonks/richmedia-temple-screenshot.svg?maxAge=2592000)](https://www.npmjs.com/package/@mediamonks/richmedia-temple-screenshot) [![npm](https://img.shields.io/npm/dm/@mediamonks/richmedia-temple-screenshot.svg?maxAge=2592000)](https://www.npmjs.com/package/@mediamonks/richmedia-temple-screenshot)
+Creates screenshots
