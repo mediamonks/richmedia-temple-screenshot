@@ -20,6 +20,7 @@ async function fromUrl({
   url,
   config = {},
   location,
+  clip = null,
   selector = null,
   clip = null,
   waitUntil = "load"
@@ -32,17 +33,18 @@ async function fromUrl({
   let rect = null;
 
   if (selector !== null) {
-    rect = await page.evaluate(selector => {
+    rect = await page.evaluate((selector,clip) => {
       const element = document.querySelector(selector);
 
       if (!element) {
-        const { innerWidth: width, innerHeight: height } = window;
-        return { left: 0, top: 0, width, height };
+        return clip;
       }
 
       const { x, y, width, height } = element.getBoundingClientRect();
-      return { left: x, top: y, width, height };
-    }, selector);
+      return {x, y, width, height };
+    }, selector,clip);
+  } else {
+    rect = clip
   }
 
   const settings = {
@@ -50,14 +52,7 @@ async function fromUrl({
   };
 
   if (rect) {
-    settings.clip = {
-      x: rect.left - padding,
-      y: rect.top - padding,
-      width: rect.width + padding * 2,
-      height: rect.height + padding * 2
-    };
-  } else if(clip && !settings.clip){
-    settings.clip = clip;
+    settings.clip = rect;
   }
 
   await page.screenshot(settings);
